@@ -49,7 +49,7 @@ SDL_SysWMinfo sysWmInfo;      /** Holds our X Display/Window information */
 int fbdev = -1;
 
 #elif defined(ODROID)
-#define USE_SRGB 1
+//#define USE_SRGB 0
 #elif defined(RPI)
 #include "bcm_host.h"
 #endif /* PANDORA */

@@ -386,8 +386,11 @@ else # ifeq Linux
 ifeq ($(PLATFORM),pandora)
 
  ifeq ($(ODROID),1)
+  #BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
+  #  -pipe -DUSE_ICON -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -fsigned-char \
+  #  -ftree-vectorize -fsingle-precision-constant
   BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
-    -pipe -DUSE_ICON -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -fsigned-char \
+    -pipe -DUSE_ICON -mcpu=cortex-a53 -fsigned-char \
     -ftree-vectorize -fsingle-precision-constant
  else
   BASE_CFLAGS = -Wall -fno-strict-aliasing -Wimplicit -Wstrict-prototypes \
@@ -418,7 +421,8 @@ ifeq ($(PLATFORM),pandora)
 
   OPTIMIZEVM = -O3 -funroll-loops -fomit-frame-pointer
   OPTIMIZE = $(OPTIMIZEVM) -ffast-math
-  HAVE_VM_COMPILED = true
+  #HAVE_VM_COMPILED = true
+  HAVE_VM_COMPILED =
 
   ifneq ($(HAVE_VM_COMPILED),true)
     BASE_CFLAGS += -DNO_VM_COMPILED
@@ -467,7 +471,8 @@ ifeq ($(PLATFORM),pandora)
   endif
   
  ifeq ($(ODROID),1)
-  BASE_CFLAGS += -DODROID -DARM -DNEON -DHAVE_GLES
+  #BASE_CFLAGS += -DODROID -DARM -DNEON -DHAVE_GLES
+  BASE_CFLAGS += -DODROID -DARM -DHAVE_GLES
  else
   BASE_CFLAGS += -DPANDORA -DARM -DNEON -DHAVE_GLES
  endif
@@ -1669,7 +1674,7 @@ ifeq ($(HAVE_VM_COMPILED),true)
     Q3OBJ += $(B)/client/vm_sparc.o
   endif
   ifeq ($(ARCH),arm)
-    Q3OBJ += $(B)/client/vm_armv7l.o
+    #Q3OBJ += $(B)/client/vm_armv7l.o
   endif
 endif
 
@@ -1845,7 +1850,7 @@ ifeq ($(HAVE_VM_COMPILED),true)
     Q3DOBJ += $(B)/ded/vm_sparc.o
   endif
   ifeq ($(ARCH),arm)
-    Q3DOBJ += $(B)/client/vm_armv7l.o
+    #Q3DOBJ += $(B)/client/vm_armv7l.o
   endif
 endif
 
